@@ -4,12 +4,16 @@ import {DEFAULT_VALUES} from "@/shared/store";
 
 const useCellUseCase = () => {
     // Деструктуризируйте нужные вам элементы для работы
-    const {board, currentPlayer, setCurrentPlayer, setBoard, setWinner} = useGameContext()
+    const {board, currentPlayer, setCurrentPlayer, setBoard, setWinner, winner} = useGameContext()
 
     // TODO: Реализовать логику нажатия на ячейку в поле
     const handleCellClick = (cell: ICell): void => {
         if (cell.player) {
             console.log('Эта ячейка уже занята!')
+            return;
+        }
+        if (winner) {
+            console.log(`Игра закончена! Победитель:${winner}`)
             return;
         }
         const updatedBoard = board.map(clickCell => {
