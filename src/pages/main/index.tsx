@@ -4,15 +4,16 @@ import styles from './styles.module.scss'
 import {useGameContext} from "@/shared/store";
 import TaskDescription from "@/widget/task";
 import {useCellUseCase} from "@/entities/cell";
-import {useBoardUseCase} from "@/entities/board";
+
 
 const MainPage = (): ReactNode => {
-    const {winner, currentPlayer} = useGameContext();
+    const {winner, currentPlayer, step} = useGameContext();
     const {handleRestart, draw} = useCellUseCase();
 
 
     return (
         <main className={styles.page}>
+            <h1 className="text-4xl">Количество ходов: {step}</h1>
             {!!winner && <h1 className="text-4xl">Игрок {winner} победил!</h1>}
             {!!draw && <h1 className="text-4xl">{draw} </h1>}
             {!winner && !draw && <h1 className="text-4xl">Следующий ход: {currentPlayer}</h1>}

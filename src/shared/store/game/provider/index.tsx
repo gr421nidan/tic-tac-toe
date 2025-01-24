@@ -7,17 +7,19 @@ const GameProvider: FC<PropsWithChildren> = ({children}) => {
 	const {
 		board: defaultBoard,
 		currentPlayer: defaultCurrentPlayer,
-		winner: defaultWinner
+		winner: defaultWinner,
 	} = DEFAULT_VALUES
 
 	const [board, setBoard] = useState<IBoard>(defaultBoard);
 	const [currentPlayer, setCurrentPlayer] = useState<IPlayer>(defaultCurrentPlayer);
 	const [winner, setWinner] = useState<IWinner>(defaultWinner);
+	const [step, setStep] = useState<number>(0);
 
 	const context = {
 		board, setBoard,
 		currentPlayer, setCurrentPlayer,
-		winner, setWinner
+		winner, setWinner,
+		step, setStep
 	}
 
 	return (

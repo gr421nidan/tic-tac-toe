@@ -4,9 +4,9 @@ import {DEFAULT_VALUES} from "@/shared/store";
 
 const useCellUseCase = () => {
     // Деструктуризируйте нужные вам элементы для работы
-    const {board, currentPlayer, setCurrentPlayer, setBoard, setWinner, winner} = useGameContext()
+    const {board, currentPlayer, setCurrentPlayer, setBoard, setWinner, winner, setStep} = useGameContext()
     let draw: string | null = null;
-    if (board.every((cell => cell.player !== null))&&!winner) {
+    if (board.every((cell => cell.player !== null)) && !winner) {
         draw = "Ничья";
     }
     // TODO: Реализовать логику нажатия на ячейку в поле
@@ -15,7 +15,7 @@ const useCellUseCase = () => {
             console.log(`Игра закончена! Победителя нет! ${draw}!`)
             return;
         }
-        if (winner || (winner && cell.player) ) {
+        if (winner || (winner && cell.player)) {
             console.log(`Игра закончена! Победитель:${winner}`)
             return;
         }
@@ -31,13 +31,14 @@ const useCellUseCase = () => {
                     ...clickCell,
                     player: currentPlayer
                 };
+
             } else {
                 return clickCell;
             }
         });//обновляю кликнутую ячейку в массиве
 
         setBoard(updatedBoard);
-
+        setStep(step => step + 1);
         setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
 
     };
@@ -47,6 +48,7 @@ const useCellUseCase = () => {
         setBoard(DEFAULT_VALUES.board);
         setWinner(DEFAULT_VALUES.winner);
         setCurrentPlayer(DEFAULT_VALUES.currentPlayer);
+        setStep(0);
     };
 
     return {

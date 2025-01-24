@@ -2,14 +2,16 @@ import {Dispatch, SetStateAction} from "react";
 import {IBoard, IPlayer} from "@/shared/interfaces";
 
 interface IGameContext {
-  board: IBoard;
-  setBoard: Dispatch<SetStateAction<IBoard>>
-  currentPlayer: IPlayer
-  setCurrentPlayer: Dispatch<SetStateAction<IPlayer>>
-  winner: IPlayer | null
-  setWinner: Dispatch<SetStateAction<IPlayer | null>>
+    board: IBoard;
+    setBoard: Dispatch<SetStateAction<IBoard>>
+    currentPlayer: IPlayer
+    setCurrentPlayer: Dispatch<SetStateAction<IPlayer>>
+    winner: IPlayer | null
+    setWinner: Dispatch<SetStateAction<IPlayer | null>>
+    step: number
+    setStep: Dispatch<SetStateAction<number>>
 }
 
 export type {
-  IGameContext
+    IGameContext
 }
