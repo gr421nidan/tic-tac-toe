@@ -5,17 +5,26 @@ import {DEFAULT_VALUES} from "@/shared/store";
 const useCellUseCase = () => {
     // Деструктуризируйте нужные вам элементы для работы
     const {board, currentPlayer, setCurrentPlayer, setBoard, setWinner, winner} = useGameContext()
-
+    let draw: string | null = null;
+    if (board.every((cell => cell.player !== null))&&!winner) {
+        draw = "Ничья";
+    }
     // TODO: Реализовать логику нажатия на ячейку в поле
     const handleCellClick = (cell: ICell): void => {
+        if (draw) {
+            console.log(`Игра закончена! Победителя нет! ${draw}!`)
+            return;
+        }
+        if (winner || (winner && cell.player) ) {
+            console.log(`Игра закончена! Победитель:${winner}`)
+            return;
+        }
+
         if (cell.player) {
             console.log('Эта ячейка уже занята!')
             return;
         }
-        if (winner) {
-            console.log(`Игра закончена! Победитель:${winner}`)
-            return;
-        }
+
         const updatedBoard = board.map(clickCell => {
             if (clickCell.id === cell.id) {
                 return {
@@ -30,6 +39,7 @@ const useCellUseCase = () => {
         setBoard(updatedBoard);
 
         setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
+
     };
 
     //перезапуск игры
@@ -41,7 +51,8 @@ const useCellUseCase = () => {
 
     return {
         handleCellClick,
-        handleRestart
+        handleRestart,
+        draw,
     }
 }
 

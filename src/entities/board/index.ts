@@ -4,7 +4,6 @@ import {IWinner} from "@/shared/interfaces";
 
 const useBoardUseCase = () => {
     const {board, setWinner, winner} = useGameContext()
-
     // TODO: Реализовать функцию расчета победителя
     const checkWinner = (): IWinner => {
         const combinations = [
@@ -27,6 +26,7 @@ const useBoardUseCase = () => {
                 return board[a].player;
             }
         }
+
         return null;
     };
 
